@@ -1,22 +1,17 @@
 package com.example.mvp
 
+import com.example.mvp.model.GitUsers
+import com.example.mvp.repository.GitUsersRepository
 import moxy.MvpPresenter
 
 class CounterPresenter(
-    private val model: CounterModel
-): MvpPresenter<MainView>(){
+    val repository:GitUsersRepository
+): MvpPresenter<MainView>() {
 
-
-    fun clickBtnOne() {
-        viewState.setText1(model.next(0).toString())
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        viewState.initList(repository.getGitUsers())
     }
 
-    fun clickBtnTwo() {
-        viewState.setText2(model.next(1).toString())
-    }
-
-    fun clickBtnThree() {
-        viewState.setText3(model.next(2).toString())
-    }
 
 }

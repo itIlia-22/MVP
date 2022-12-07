@@ -1,42 +1,35 @@
 package com.example.mvp
 
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvp.databinding.ActivityMainBinding
+import com.example.mvp.model.GitUsers
+import com.example.mvp.repository.impl.RepositoryGitUserImpl
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
     private lateinit var binding: ActivityMainBinding
-    private val presenter by moxyPresenter { CounterPresenter(CounterModel()) }
-
+    private val presenter by moxyPresenter { CounterPresenter(RepositoryGitUserImpl()) }
+    private val adapter = MainAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btn.setOnClickListener {
-            presenter.clickBtnOne()
+        with(binding) {
+            rvUsers.layoutManager = LinearLayoutManager(this@MainActivity)
+            rvUsers.adapter = adapter
+
         }
-        binding.btn1.setOnClickListener {
-            presenter.clickBtnTwo()
-        }
-        binding.btn2.setOnClickListener {
-            presenter.clickBtnThree()
-        }
+
+    }
+
+    override fun initList(list: List<GitUsers>) {
+        adapter.users = list
     }
 
 
-    override fun setText1(counter: String) = with(binding) {
-        text.text = counter
-    }
-
-    override fun setText2(counter: String) = with(binding) {
-        text1.text = counter
-    }
-
-    override fun setText3(counter: String) = with(binding) {
-        text2.text = counter
-    }
 }
