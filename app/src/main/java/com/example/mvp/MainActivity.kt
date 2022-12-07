@@ -1,13 +1,14 @@
 package com.example.mvp
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.example.mvp.databinding.ActivityMainBinding
+import moxy.MvpAppCompatActivity
+import moxy.ktx.moxyPresenter
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : MvpAppCompatActivity(), MainView {
 
     private lateinit var binding: ActivityMainBinding
-    private val presenter = CounterPresenter(this)
+    private val presenter by moxyPresenter { CounterPresenter(CounterModel()) }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,14 +27,16 @@ class MainActivity : AppCompatActivity(), MainView {
         }
     }
 
-    override fun setText(counter: String, id: Int) {
-        with(binding){
-            when (id) {
-                0 -> text.text = counter
-                1-> text1.text = counter
-                2 -> text2.text = counter
-            }
-        }
 
+    override fun setText1(counter: String) = with(binding) {
+        text.text = counter
+    }
+
+    override fun setText2(counter: String) = with(binding) {
+        text1.text = counter
+    }
+
+    override fun setText3(counter: String) = with(binding) {
+        text2.text = counter
     }
 }
