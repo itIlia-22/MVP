@@ -2,6 +2,7 @@ package com.example.mvp.repository.impl
 
 import com.example.mvp.model.GitUsers
 import com.example.mvp.repository.GitUsersRepository
+import io.reactivex.rxjava3.core.Single
 
 class RepositoryGitUserImpl : GitUsersRepository {
     private val repository = listOf(
@@ -13,8 +14,11 @@ class RepositoryGitUserImpl : GitUsersRepository {
 
         )
 
-    override fun getGitUsers(): List<GitUsers> = repository
-
+    override fun getGitUsers(): Single<List<GitUsers>> {
+        return Single.create {
+            it.onSuccess(repository)
+        }
+    }
 
 
 }

@@ -57,6 +57,14 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressendListener {
         adapter.users = list
     }
 
+    override fun show() = with(binding){
+        lodList.visibility = View.VISIBLE
+    }
+
+    override fun hide() = with(binding){
+        lodList.visibility = View.GONE
+    }
+
     override fun onBackPressend(): Boolean {
         return presenter.onBackPressed()
     }
