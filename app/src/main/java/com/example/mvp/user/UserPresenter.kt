@@ -32,6 +32,10 @@ class UserPresenter(
         router.navigateTo(UserScreen.UserDetails(login))
     }
 
+    fun openConvertFragment(){
+        router.navigateTo(UserScreen.ConvertToFragment())
+    }
+
     fun onBackPressed(): Boolean {
         router.replaceScreen(UserScreen)
         return true

@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvp.App
+import com.example.mvp.databinding.FragmentUserBinding
 import com.example.mvp.interfacs.OnBackPressendListener
 import com.example.mvp.interfacs.OnClickListener
-import com.example.mvp.databinding.FragmentUserBinding
 import com.example.mvp.model.GitUsers
 import com.example.mvp.repository.impl.RepositoryGitUserImpl
 import moxy.MvpAppCompatFragment
@@ -31,6 +31,7 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressendListener {
 
     })
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
@@ -38,6 +39,8 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressendListener {
             rvUsers.adapter = adapter
 
         }
+
+
     }
 
     override fun onCreateView(
@@ -57,13 +60,20 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressendListener {
         adapter.users = list
     }
 
-    override fun show() = with(binding){
+    override fun show() = with(binding) {
         lodList.visibility = View.VISIBLE
     }
 
-    override fun hide() = with(binding){
+    override fun hide() = with(binding) {
         lodList.visibility = View.GONE
     }
+
+    override fun openClickFragment() = with(binding) {
+        convert.setOnClickListener {
+            presenter.openConvertFragment()
+        }
+    }
+
 
     override fun onBackPressend(): Boolean {
         return presenter.onBackPressed()
