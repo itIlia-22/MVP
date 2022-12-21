@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvp.App
+import com.example.mvp.api.Retrofit
+import com.example.mvp.api.UserApi
+import com.example.mvp.api.data.loc.GitHubUser
+import com.example.mvp.api.repo.GitHubUsersRepositoryImpl
 import com.example.mvp.databinding.FragmentUserBinding
 import com.example.mvp.interfacs.OnBackPressendListener
 import com.example.mvp.interfacs.OnClickListener
-import com.example.mvp.model.GitUsers
-import com.example.mvp.repository.impl.RepositoryGitUserImpl
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -21,7 +23,7 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressendListener {
     private val presenter by moxyPresenter {
         UserPresenter(
             App.instance.router,
-            RepositoryGitUserImpl()
+            GitHubUsersRepositoryImpl(Retrofit.api)
         )
     }
     private val adapter = UserAdapter(object : OnClickListener {
@@ -56,8 +58,10 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressendListener {
         fun newInstance() = UserFragment()
     }
 
-    override fun initList(list: List<GitUsers>) {
-        adapter.users = list
+
+
+    override fun initList(list: List<GitHubUser>) {
+        adapter.userApis = list
     }
 
     override fun show() = with(binding) {

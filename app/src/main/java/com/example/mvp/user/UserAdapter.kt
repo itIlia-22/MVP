@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mvp.api.UserApi
+import com.example.mvp.api.data.loc.GitHubUser
 import com.example.mvp.interfacs.OnClickListener
 import com.example.mvp.databinding.ItemUserBinding
-import com.example.mvp.model.GitUsers
 
 class UserAdapter(val onClickListener: OnClickListener) :
     RecyclerView.Adapter<UserAdapter.MyViewHolder>() {
-    var users: List<GitUsers> = emptyList()
+    var userApis: List<GitHubUser> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
@@ -20,7 +21,7 @@ class UserAdapter(val onClickListener: OnClickListener) :
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(login: GitUsers) {
+        fun bind(login: GitHubUser) {
             ItemUserBinding.bind(itemView).apply {
                 tvLogin.text = login.login
                 tvLogin.setOnClickListener {
@@ -38,8 +39,8 @@ class UserAdapter(val onClickListener: OnClickListener) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(users[position])
+        holder.bind(userApis[position])
     }
 
-    override fun getItemCount(): Int = users.size
+    override fun getItemCount(): Int = userApis.size
 }
