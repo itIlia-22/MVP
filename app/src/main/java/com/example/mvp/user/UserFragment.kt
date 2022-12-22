@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvp.App
 import com.example.mvp.api.Retrofit
-import com.example.mvp.api.UserApi
 import com.example.mvp.api.data.loc.GitHubUser
 import com.example.mvp.api.repo.GitHubUsersRepositoryImpl
 import com.example.mvp.databinding.FragmentUserBinding
@@ -65,10 +64,12 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressendListener {
     }
 
     override fun show() = with(binding) {
+        rvUsers.visibility = View.GONE
         lodList.visibility = View.VISIBLE
     }
 
     override fun hide() = with(binding) {
+        rvUsers.visibility = View.VISIBLE
         lodList.visibility = View.GONE
     }
 

@@ -17,7 +17,7 @@ class UserPresenter(
         super.onFirstViewAttach()
         viewState.show()
         repository.getUsers()
-            .delay(3000L, TimeUnit.MILLISECONDS)
+            .delay(1000L, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 viewState.initList(it)

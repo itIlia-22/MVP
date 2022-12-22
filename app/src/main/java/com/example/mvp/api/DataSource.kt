@@ -6,8 +6,8 @@ import retrofit2.http.Path
 
 interface DataSource {
     @GET("/users")
-    fun loadUser(): Single<List<UserApi>>
+    fun loadUser(): Single<List<UserApiDto>>
 
     @GET("users/{login}")
-    fun getLogin(@Path("login") login: String): Single<List<UserApi>>
+    fun getLogin(@Path("login") login: String): Single<UserApiDto>
 }

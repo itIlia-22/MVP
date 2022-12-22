@@ -11,5 +11,10 @@ class GitHubUsersRepositoryImpl constructor(private val api: DataSource) : GitHu
             .map { it.map(Mapper::mapToEntity) }
     }
 
+    override fun getUserLogin(login: String): Single<GitHubUser> {
+        return api.getLogin(login)
+            .map(Mapper::mapToEntity)
+    }
+
 
 }

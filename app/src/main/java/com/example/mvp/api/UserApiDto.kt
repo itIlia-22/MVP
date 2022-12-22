@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class UserApi(
+data class UserApiDto(
     @Expose
     @SerializedName("id")
     val id: String ,
