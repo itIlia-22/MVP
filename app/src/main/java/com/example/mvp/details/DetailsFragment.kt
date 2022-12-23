@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvp.App
 import com.example.mvp.api.Retrofit
-import com.example.mvp.api.data.loc.GitHubUser
+import com.example.mvp.model.loc.GitHubUser
+import com.example.mvp.model.loc.Repos
 import com.example.mvp.api.repo.GitHubUsersRepositoryImpl
 import com.example.mvp.databinding.FragmentDetailsBinding
 import com.example.mvp.interfacs.OnBackPressendListener
@@ -19,7 +21,7 @@ import moxy.ktx.moxyPresenter
 
 class DetailsFragment : MvpAppCompatFragment(), DetailsView, OnBackPressendListener {
     private lateinit var binding: FragmentDetailsBinding
-
+    private val adapter = DetailsAdapter()
     private val presenter by moxyPresenter {
         DetailsPresenter(
             App.instance.router,
@@ -32,6 +34,12 @@ class DetailsFragment : MvpAppCompatFragment(), DetailsView, OnBackPressendListe
         super.onViewCreated(view, savedInstanceState)
         arguments?.getString(ARG_LOGIN)?.let { login ->
             presenter.loadUser(login)
+            presenter.loadRepos(login)
+        }
+
+        with(binding) {
+            rvRepo.layoutManager = LinearLayoutManager(requireContext())
+            rvRepo.adapter = adapter
         }
     }
 
@@ -46,11 +54,13 @@ class DetailsFragment : MvpAppCompatFragment(), DetailsView, OnBackPressendListe
 
     companion object {
         private const val ARG_LOGIN = "ARG_LOGIN"
-        fun newInstance(login: String): DetailsFragment {
+
+        fun newInstance(data: String): DetailsFragment {
             return DetailsFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_LOGIN, login)
+                    putString(ARG_LOGIN, data)
                 }
+
             }
         }
     }
@@ -63,6 +73,10 @@ class DetailsFragment : MvpAppCompatFragment(), DetailsView, OnBackPressendListe
     override fun showLogin(login: GitHubUser) = with(binding) {
         image.loadView(login.avatar_url)
         txLogin.text = login.login
+    }
+
+    override fun initList(repo: List<Repos>) {
+        adapter.userApis = repo
     }
 
     override fun show() = with(binding) {

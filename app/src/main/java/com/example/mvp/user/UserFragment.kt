@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvp.App
 import com.example.mvp.api.Retrofit
-import com.example.mvp.api.data.loc.GitHubUser
+import com.example.mvp.model.loc.GitHubUser
 import com.example.mvp.api.repo.GitHubUsersRepositoryImpl
 import com.example.mvp.databinding.FragmentUserBinding
 import com.example.mvp.interfacs.OnBackPressendListener

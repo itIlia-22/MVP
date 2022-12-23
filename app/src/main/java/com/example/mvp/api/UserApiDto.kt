@@ -17,4 +17,6 @@ data class UserApiDto(
     @SerializedName("avatar_url")
     val avatar_url: String? ,
 
+
     ) : Parcelable
+

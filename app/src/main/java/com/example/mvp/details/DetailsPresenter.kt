@@ -27,6 +27,19 @@ class DetailsPresenter(
             })
 
     }
+    fun loadRepos(repos: String){
+        viewState.show()
+        repository.getRepo(repos)
+            .delay(1000L, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                viewState.initList(it)
+                viewState.hide()
+            }, {
+                Log.d("TAG", it.toString())
+            })
+
+    }
 
 
     fun onBackPressed(): Boolean {

@@ -1,6 +1,6 @@
 package com.example.mvp.user
 
-import com.example.mvp.api.data.loc.GitHubUser
+import com.example.mvp.model.loc.GitHubUser
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndStrategy
 import moxy.viewstate.strategy.StateStrategyType

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mvp.api.data.loc.GitHubUser
+import com.example.mvp.model.loc.GitHubUser
 import com.example.mvp.databinding.ItemUserBinding
 import com.example.mvp.interfacs.OnClickListener
 import com.example.mvp.utils.loadViewList

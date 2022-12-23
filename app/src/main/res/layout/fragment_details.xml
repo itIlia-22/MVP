@@ -36,4 +36,18 @@
         app:layout_constraintTop_toBottomOf="@+id/image"
         tools:ignore="HardcodedText" />
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRepo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txLogin"
+        tools:listitem="@layout/item_repo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
