@@ -9,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
 data class UserApiDto(
     @Expose
     @SerializedName("id")
-    val id: String ,
+    val id: Long ,
     @Expose
     @SerializedName("login")
     val login: String ,

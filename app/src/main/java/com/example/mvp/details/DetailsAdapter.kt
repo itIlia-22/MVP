@@ -5,29 +5,30 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvp.databinding.ItemRepoBinding
-import com.example.mvp.model.loc.Repos
+import com.example.mvp.model.loc.GitHubRepos
 
-//val onClickListener: OnClickListener
-class DetailsAdapter() :
+typealias OnRepoClickListener = (id: Long) -> Unit
+
+class DetailsAdapter(private val onUserClickListener: OnRepoClickListener) :
     RecyclerView.Adapter<DetailsAdapter.MyViewHolder>() {
-    var userApis: List<Repos> = emptyList()
+    var userApis: List<GitHubRepos> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    inner class MyViewHolder(itemView: ItemRepoBinding) : RecyclerView.ViewHolder(itemView.root) {
+    inner class MyViewHolder(
+        itemView: ItemRepoBinding,
+        private val onUserClickListener: OnRepoClickListener,
+    ) : RecyclerView.ViewHolder(itemView.root) {
 
-        fun bind(repo: Repos) {
+        fun bind(repo: GitHubRepos) {
             ItemRepoBinding.bind(itemView).apply {
-                tvRepo.text = repo.url
-
-                /*
-                tvLogin.setOnClickListener {
-                    onClickListener.onClick(login.login)
+                tvRepo.text = repo.fullName
+                root.setOnClickListener {
+                    onUserClickListener.invoke(repo.id)
                 }
-                 */
 
             }
 
@@ -36,8 +37,11 @@ class DetailsAdapter() :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = ItemRepoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyViewHolder(view)
+        val view = ItemRepoBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
+
+        return MyViewHolder(view, onUserClickListener)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {

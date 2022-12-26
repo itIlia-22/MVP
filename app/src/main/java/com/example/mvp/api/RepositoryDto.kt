@@ -9,43 +9,14 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class RepositoryDto(
     @Expose
-    @SerializedName("forks_url")
-    val forks_url: String,
-    @Expose
     @SerializedName("id")
-    val id: Int,
-    @SerializedName("node_id")
+    val id: Long,
     @Expose
-    val nodeId: String = "",
-    @Expose
-    @SerializedName("name")
-    val name: String,
+    @SerializedName("forks")
+    val forks: Int,
     @Expose
     @SerializedName("full_name")
-    val fullName: String,
-    @Expose
-    @SerializedName("owner")
-    val owner: GitHubUser,
-    @Expose
-    @SerializedName("private")
-    val private: Boolean = false,
-    @Expose
-    @SerializedName("html_url")
-    val htmlUrl: String,
-    @Expose
-    @SerializedName("url")
-    val url: String,
-    @Expose
-    @SerializedName("description")
-    val description: String,
-    @Expose
-    @SerializedName("forks_count")
-    val forksCount: Int,
-    @Expose
-    @SerializedName("stargazers_count")
-    val stargazersCount: Int,
-    @Expose
-    @SerializedName("starred_url")
-    val watchersCount: Int,
+    val name: String
 
-    ) : Parcelable
+
+) : Parcelable
