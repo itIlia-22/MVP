@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mvp.databinding.ItemRepoBinding
 import com.example.mvp.model.loc.GitHubRepos
 
-typealias OnRepoClickListener = (id: Long) -> Unit
-
-class DetailsAdapter(private val onUserClickListener: OnRepoClickListener) :
+//typealias OnRepoClickListener = (id: Long) -> Unit
+//private val onUserClickListener: OnRepoClickListener
+class DetailsAdapter() :
     RecyclerView.Adapter<DetailsAdapter.MyViewHolder>() {
     var userApis: List<GitHubRepos> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
@@ -20,14 +20,14 @@ class DetailsAdapter(private val onUserClickListener: OnRepoClickListener) :
 
     inner class MyViewHolder(
         itemView: ItemRepoBinding,
-        private val onUserClickListener: OnRepoClickListener,
+        //private val onUserClickListener: OnRepoClickListener,
     ) : RecyclerView.ViewHolder(itemView.root) {
 
         fun bind(repo: GitHubRepos) {
             ItemRepoBinding.bind(itemView).apply {
-                tvRepo.text = repo.fullName
+                tvRepo.text = repo.forks_url
                 root.setOnClickListener {
-                    onUserClickListener.invoke(repo.id)
+                    //onUserClickListener.invoke(repo.id)
                 }
 
             }
@@ -41,7 +41,7 @@ class DetailsAdapter(private val onUserClickListener: OnRepoClickListener) :
             LayoutInflater.from(parent.context), parent, false
         )
 
-        return MyViewHolder(view, onUserClickListener)
+        return MyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {

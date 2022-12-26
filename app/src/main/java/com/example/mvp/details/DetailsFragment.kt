@@ -21,9 +21,9 @@ import moxy.ktx.moxyPresenter
 
 class DetailsFragment : MvpAppCompatFragment(), DetailsView, OnBackPressendListener {
     private lateinit var binding: FragmentDetailsBinding
-    private val adapter = DetailsAdapter {
-        presenter.onClickRepos(it)
-    }
+    private val adapter = DetailsAdapter (
+       // presenter.onClickRepos(it)
+    )
     private val presenter by moxyPresenter {
         DetailsPresenter(
             App.instance.router,
@@ -39,10 +39,10 @@ class DetailsFragment : MvpAppCompatFragment(), DetailsView, OnBackPressendListe
 
         }
 
-        with(binding) {
-            rvRepo.layoutManager = LinearLayoutManager(requireContext())
-            rvRepo.adapter = adapter
-        }
+     //   with(binding) {
+    //        rvRepo.layoutManager = LinearLayoutManager(requireContext())
+      //      rvRepo.adapter = adapter
+     //   }
     }
 
     override fun onCreateView(
@@ -73,15 +73,27 @@ class DetailsFragment : MvpAppCompatFragment(), DetailsView, OnBackPressendListe
     }
 
 
+   /*
     override fun showLogin(login: GitHubUser, repos: List<GitHubRepos>) {
-        binding.apply {
+
+     binding.apply {
             image.loadView(login.avatar_url)
             txLogin.text = login.login
-            adapter.userApis = repos
+            //adapter.userApis = repos
         }
 
     }
+    */
 
+
+
+    override fun showLogin(login: GitHubUser) {
+        binding.apply {
+            image.loadView(login.avatar_url)
+            txLogin.text = login.login
+            //adapter.userApis = repos
+        }
+    }
 
 
     override fun show() = with(binding) {

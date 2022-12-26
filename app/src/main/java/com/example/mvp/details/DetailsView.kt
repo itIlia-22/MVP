@@ -8,8 +8,8 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndStrategy::class)
 interface DetailsView : MvpView {
-
-    fun showLogin(login: GitHubUser,repos:List<GitHubRepos>)
+   // repos:List<GitHubRepos>
+    fun showLogin(login: GitHubUser,)
     fun show()
     fun hide()
 }

@@ -19,17 +19,17 @@ class DetailsPresenter(
 
     fun loadUser(login:String) {
         viewState.show()
-        Single.zip(
-            repository.getUserLogin(login),
-            repository.getRepo(login)
+      //  Single.zip(
+            repository.getUserLogin(login)
+           // repository.getRepo(login)
 
-        ) { user, repo ->
-            return@zip Pair<GitHubUser, List<GitHubRepos>>(user, repo)
-        }
+       // ) { user, repo ->
+     //       return@zip Pair<GitHubUser, List<GitHubRepos>>(user, repo)
+
             .delay(1000L, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                viewState.showLogin(it.first,it.second)
+                viewState.showLogin(it)
                 viewState.hide()
             }, {
                 Log.d("TAG", it.toString())
